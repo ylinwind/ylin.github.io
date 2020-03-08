@@ -346,36 +346,35 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/12/29/ylin-20191229-02/" >
+        <a class="abstract-title" href = "/2019/03/15/ylin-react-20190315/" >
             
-                <span>JS计算出一段文字当中每个字所占的位置</span>
+                <span>React 生命周期渲染</span>
         </a>
         <div class="abstract-content">
-            
-描述 ：因为要做一个文字动画，要使得一段文字中的每个文字单独执行动画，所以必须将每个文字进行分离，计算出原本文字在这一段文字当中的位置
-思路 1  起初的思路是根据这一段的文字的文字属性，例如字体大小 , 字间距 , 行高等来计算出每个文字的位置坐标，但是过程当中遇到诸如此类的问题：
+            React 生命周期渲染问题点渲染分为两个阶段： reconciliation和commit。前者过程是可以打断的，后者是不能暂停，会一直更新界面直到完成。
+Reconciliation阶段包括
+componentWillMount
+componentWillReceiveProps
+shouldComponentUpdate
+componentWillUpdate
 
-中文汉字和英文字母在同样属性下所占的空间不同
-各种符号所占空间不同
-中英文情况下的符号也表现各不相同
+Commit 节点包括
+componentDidMount
+componentDidUpdate
+componentWillUnmount
 
-
-当时面对这些问题时，就停止了这条思考路线，要不就是一点点适配，就算到时候结果出来了，估计在时间成本和效果上也不是很满意
-
-思路 2利用系统自己的渲染方式去实现。
-
-将每个文字用 ++span++ 标...
+因为Reconciliation节点是可以被打断的，所以Reconciliati...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/29</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/15</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JAVASCRIPT">JAVASCRIPT</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "React">React</a>
     
 </div>
             
@@ -388,30 +387,142 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/12/29/ylin-20191229-01/" >
+        <a class="abstract-title" href = "/2019/03/11/ylin-20190311/" >
             
-                <span>JavaScript中video控制时间问题</span>
+                <span>浏览器缓存</span>
         </a>
         <div class="abstract-content">
-            问题描述一个视频播放的功能，并且可以设置从指定位置开始结束。如果视频是按照正常的从头到尾播放则正常，但是如果设置了开始位置时间后，会导致一个问题便是视频跳转到指定位置后，但是视频并未加载到此位置，就就导致绿屏等类似现象。
-解决办法当然这个问题很清晰是什么原因导致的。找了一些办法来判断视频是否加载成功。一开始是用的是 durationchange， 这个只是视频的总时长变化会触发，不准确。后面又用过loadedmetadata ，还是不怎么能很有效的解决。去了官网找信息。解决了。
+            浏览器缓存机制
+注意此知识点属于性能优化领域
 
-loadstart 加载开始
-durationchange 时长发生变化
-loadedmetadata 视频...
+缓存可以说是性能优化中简单高效的一种优化方式了，它可以显著减少网络传输所带来的损耗。
+对于一个数据请求来说，可以分为发起网络请求、后端处理、浏览器响应步骤。浏览器缓存可以帮助我们在第一和第三步骤中优化性能。比如说直接使用缓存而不发起请求，或者发起了请求但是后端存储的数据和前端一致，那么久没有必要再将数据回传回来，这样就减少了响应数据。
+接下来可以从几个部分来探讨浏览器缓存机制：
+
+缓存位置
+缓存策略
+实际场景应用缓存策略
+
+缓存位置
+从缓存位置上来说可以分为四种，并且各自有优先级，当依次查找缓存且都没有找到的时候，才会去请求网络；
+
+Ser...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/29</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/11</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JAVASCRIPT">JAVASCRIPT</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "浏览器缓存">浏览器缓存</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VIDEO">VIDEO</a>
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/07/ylin-20190307-01/" >
+            
+                <span>JavaScript 克隆简介</span>
+        </a>
+        <div class="abstract-content">
+            JavaScript 克隆日常开发当中经常会遇到由于js引用数据类型导致的开发烦恼，Now，我们就来谈一谈js当中的一些克隆方式方法；
+首先js克隆基本分为浅克隆、深克隆两种方式
+克隆前传
+我们知道在引用数据类型当中如：对象、数组这样的都是一个地方存储数据一个地方存储地址，一般就是说的栈来存地址数据则是存储在堆当中的。
+例如：
+
+
+12let a = &#123;b:1&#125;//此处a 即是地址，真实数据则是&#123;b:1&#125;
+  好了，咱们go on。
+
+浅克隆
+
+浅克隆很明显就是很浅的克隆不会把深层次的数据克隆（说了像没说）；意思是对于复杂类型的数据来说，它只是克隆...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaScript">JavaScript</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/07/ylin-20190307-02/" >
+            
+                <span>JavaScript 继承！！！</span>
+        </a>
+        <div class="abstract-content">
+            JavaSctipt 继承首先我们知道JavaScript是没有继承的概念的，类似于其他的面向对象的语言Java,C++等；没有”子类”和”父类”的概念，也没有”类”（class）和”实例”（instance）的区分，全靠一种很奇特的”原型链”（prototype chain）模式来实现继承。下面就记录下常见的继承方式和他们的优缺点。
+Super codefunction Person(name,age,sex){
+    this.name = name || &apos;name&apos;;
+    this.age = age || 0;
+    this.sex = sex |...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaScript">JavaScript</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/07/ylin-20190307-03/" >
+            
+                <span>JavaScript 函数节流和防抖</span>
+        </a>
+        <div class="abstract-content">
+            函数节流控制函数在一定时间范围内只会执行一次，避免多次执行或者不执行；
+直接上代码：
+1234567891011121314var throttle_timer = null;var throttle_flag = false;var timer_delay = 300;function func_throttle()&#123;//函数节流    if(throttle_flag)&#123;        return;    &#125;    throttle_flag = true;    throttle_timer = setTimeout(() =&gt; &#123; ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/07</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaScript">JavaScript</a>
     
 </div>
             
@@ -859,10 +970,9 @@ loadedmetadata 视频...
     
     
     
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 26
+        Total : 27
         </div>
         <!-- search  -->
         
@@ -875,6 +985,11 @@ loadedmetadata 视频...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/ylin-20200308/" >2020三月第一周学习记录</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -902,12 +1017,12 @@ loadedmetadata 视频...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/ylin-20191229-02/" >JS计算出一段文字当中每个字所占的位置</a>
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/ylin-20191229-01/" >JavaScript中video控制时间问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/ylin-20191229-01/" >JavaScript中video控制时间问题</a>
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2019/12/29/ylin-20191229-02/" >JS计算出一段文字当中每个字所占的位置</a>
         </li>
     
     
@@ -1020,7 +1135,7 @@ loadedmetadata 视频...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="像素值"><span class="iconfont-archer">&#xe606;</span>像素值</span>
     
@@ -1028,7 +1143,7 @@ loadedmetadata 视频...
     
         <span class="sidebar-tag-name" data-tags="英寸值"><span class="iconfont-archer">&#xe606;</span>英寸值</span>
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
     
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
     
@@ -1045,6 +1160,8 @@ loadedmetadata 视频...
         <span class="sidebar-tag-name" data-tags="VIDEO"><span class="iconfont-archer">&#xe606;</span>VIDEO</span>
     
         <span class="sidebar-tag-name" data-tags="工作记录"><span class="iconfont-archer">&#xe606;</span>工作记录</span>
+    
+        <span class="sidebar-tag-name" data-tags="学习记录"><span class="iconfont-archer">&#xe606;</span>学习记录</span>
     
         <span class="sidebar-tag-name" data-tags="D3.js"><span class="iconfont-archer">&#xe606;</span>D3.js</span>
     
@@ -1103,105 +1220,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="工作记录"><span class="iconfont-archer">&#xe60a;</span>工作记录</span>
     
-        <span class="sidebar-category-name" data-categories="兴趣英语"><span class="iconfont-archer">&#xe60a;</span>兴趣英语</span>
-    
         <span class="sidebar-category-name" data-categories="CSS/HTML/面试"><span class="iconfont-archer">&#xe60a;</span>CSS/HTML/面试</span>
     
         <span class="sidebar-category-name" data-categories="JAVASCRIPT/工作问题"><span class="iconfont-archer">&#xe60a;</span>JAVASCRIPT/工作问题</span>
     
-        <span class="sidebar-category-name" data-categories="工作记录/ffmpeg"><span class="iconfont-archer">&#xe60a;</span>工作记录/ffmpeg</span>
-    
-        <span class="sidebar-category-name" data-categories="工作记录/ffmpeg/pupptter"><span class="iconfont-archer">&#xe60a;</span>工作记录/ffmpeg/pupptter</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "ylinwind"
-    }
-</script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
-    </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
-    
-    <!-- busuanzi  -->
-    
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
-    </div>
-    <!-- async load share.js -->
-     
-    </body>
-</html>
-
-
-n>
-    
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="转载"><span class="iconfont-archer">&#xe60a;</span>转载</span>
-    
-        <span class="sidebar-category-name" data-categories="CSS"><span class="iconfont-archer">&#xe60a;</span>CSS</span>
-    
-        <span class="sidebar-category-name" data-categories="JavaScript"><span class="iconfont-archer">&#xe60a;</span>JavaScript</span>
-    
-        <span class="sidebar-category-name" data-categories="CSS/HTML"><span class="iconfont-archer">&#xe60a;</span>CSS/HTML</span>
-    
-        <span class="sidebar-category-name" data-categories="JAVASCRIPT"><span class="iconfont-archer">&#xe60a;</span>JAVASCRIPT</span>
-    
-        <span class="sidebar-category-name" data-categories="工作记录"><span class="iconfont-archer">&#xe60a;</span>工作记录</span>
-    
         <span class="sidebar-category-name" data-categories="兴趣英语"><span class="iconfont-archer">&#xe60a;</span>兴趣英语</span>
-    
-        <span class="sidebar-category-name" data-categories="CSS/HTML/面试"><span class="iconfont-archer">&#xe60a;</span>CSS/HTML/面试</span>
-    
-        <span class="sidebar-category-name" data-categories="JAVASCRIPT/工作问题"><span class="iconfont-archer">&#xe60a;</span>JAVASCRIPT/工作问题</span>
     
         <span class="sidebar-category-name" data-categories="工作记录/ffmpeg"><span class="iconfont-archer">&#xe60a;</span>工作记录/ffmpeg</span>
     
